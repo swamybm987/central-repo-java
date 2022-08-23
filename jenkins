@@ -4,23 +4,23 @@ pipeline {
     
     stages {
         stage('Checkout') {
-            agent {label 'slave'}
+            agent {label 'slave1'}
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/makarand155/123java.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/raghumrv/java.git']]])
             }
         }
         
         stage('build') {
-            agent {label 'slave'}
+            agent {label 'slave1'}
             steps {
                 sh 'mvn clean package'
             }
         }
         
          stage('deploytotomcatserver') {
-            agent {label 'slave'}
+            agent {label 'slave1'}
             steps {
-               deploy adapters: [tomcat9(credentialsId: 'tomcatuser', path: '', url: 'http://54.204.58.193:8080/')], contextPath: null, war: '*/.war' 
+               deploy adapters: [tomcat10(credentialsId: 'tomcatuser', path: '', url: 'http://3.84.0.98:8080/')], contextPath: null, war: '*/.war' 
             }
         }
     }    
