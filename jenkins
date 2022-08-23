@@ -20,7 +20,7 @@ pipeline {
          stage('deploytotomcatserver') {
             agent {label 'slave1'}
             steps {
-               deploy adapters: [tomcat10(credentialsId: 'tomcatuser', path: '', url: 'http://3.84.0.98:8080/')], contextPath: null, war: '*/.war' 
+               deploy adapters: [tomcat9(credentialsId: 'tomcatuser', path: '', url: 'http://3.84.0.98:8080/')], contextPath: null, war: '*/.war' 
             }
         }
     }    
